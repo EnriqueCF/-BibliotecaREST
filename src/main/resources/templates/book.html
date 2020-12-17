@@ -1,0 +1,26 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<h3> Libro</h3>
+	<ul>
+	<li>Titulo: {{book.title}}</li>
+	<li>Resumen: {{book.resume}}</li>
+	<li>Autor: {{book.author}}</li>
+	<li>Editorial: {{book.editorial}}</li>
+	<li>Año: {{book.year}}</li>
+	</ul>
+	<hr>
+	<h3>Comentarios del libro:</h3>
+		{{#book.comments}}
+			<p> Autor: {{author}}, comentario: {{comment}}, Puntuación: {{rate}} - <a href="/books/{{book.id}}/comments/{{id}}">BORRAR</a></p>
+
+		{{/book.comments}}
+	<a href="/books/{{book.id}}/comments/new">Añadir comentario</a>
+	<hr/>
+
+	<a href="/">Volver</a>
+</body>
+
+</html>

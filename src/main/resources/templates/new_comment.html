@@ -1,0 +1,29 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<form action="/books/{{id}}/comments/" method="post">
+		<h3>Nuevo comentario</h3>
+		<p> Autor: </p>
+		{{ #user }}
+            <input type='text' name='author' value="{{ user }}"/>
+        {{ /user }}
+        {{ ^user}}
+            <input type='text' name='author'/>
+        {{ /user }}
+		<p>Comentario:</p>
+		<textarea name='comment' rows=5 cols=40></textarea>
+		<p>Puntuación:</p>
+		<select name="rate">
+		<option value="0">0</option>
+		  <option value="1">1</option> 
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		</select>
+		<input type='submit' value='Save'/>
+	</form>
+</body>
+</html>
