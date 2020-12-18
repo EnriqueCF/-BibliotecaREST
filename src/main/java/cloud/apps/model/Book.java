@@ -3,37 +3,92 @@ package cloud.apps.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity(name = "books")
 public class Book {
 
-	public interface Basic {
-	}
-	
-	@JsonView(Basic.class)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@JsonView(Basic.class)
 	private String title;
-	private String resume;
+	private String summary;
 	private String author;
-	private String editorial;
-	private int year;
-	
-	List<Comment> comments;
-	
-	public Book(String title, String resume, String author, String editorial, Integer year) {
+	private String publisher;
+	private int publicationYear;
+
+	// @formatter:off
+	@OneToMany(mappedBy = "book", 
+			orphanRemoval = true, 
+			fetch = FetchType.LAZY, 
+			cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<>();
+	// @formatter:on
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
 		this.title = title;
-		this.resume = resume;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
 		this.author = author;
-		this.editorial = editorial;
-		this.year = year;
-		this.comments = new ArrayList<>();
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public int getPublicationYear() {
+		return publicationYear;
+	}
+
+	public void setPublicationYear(int publicationYear) {
+		this.publicationYear = publicationYear;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public Book() {
+		super();
 	}
 }
